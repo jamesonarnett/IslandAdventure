@@ -1,11 +1,8 @@
+import Sprite from "./classes/Sprite.js";
+import { keys } from "./gameObjects.js";
+
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
-
-canvas.width = 1024;
-canvas.height = 576;
-
-c.fillStyle = "white";
-c.fillRect(0, 0, canvas.width, canvas.height);
 
 const image = new Image();
 image.src = "assets/imgs/pelletTown.png";
@@ -13,37 +10,17 @@ image.src = "assets/imgs/pelletTown.png";
 const playerImage = new Image();
 playerImage.src = "assets/imgs/character/playerDown.png";
 
-class Sprite {
-  constructor({ position, velocity, image }) {
-    this.position = position;
-    this.image = image;
-  }
-
-  draw() {
-    c.drawImage(this.image, this.position.x, this.position.y);
-  }
-}
+canvas.width = 1024;
+canvas.height = 576;
+c.fillStyle = "white";
+c.fillRect(0, 0, canvas.width, canvas.height);
 
 const background = new Sprite({
   position: { x: -735, y: -600 },
   image: image,
 });
 
-const keys = {
-  w: {
-    pressed: false,
-  },
-  a: {
-    pressed: false,
-  },
-  s: {
-    pressed: false,
-  },
-  d: {
-    pressed: false,
-  },
-};
-
+//--------------------------------------------------------------
 function animate() {
   requestAnimationFrame(animate);
   background.draw();
@@ -73,6 +50,7 @@ function animate() {
 
 animate();
 
+//--------------------------------------------------------------
 let lastKey = "";
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
@@ -93,7 +71,6 @@ window.addEventListener("keydown", (e) => {
       lastKey = "d";
       break;
   }
-  console.log(keys);
 });
 
 window.addEventListener("keyup", (e) => {
@@ -111,5 +88,4 @@ window.addEventListener("keyup", (e) => {
       keys.d.pressed = false;
       break;
   }
-  console.log(keys);
 });
