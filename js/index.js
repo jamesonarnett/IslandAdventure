@@ -1,5 +1,6 @@
 import Sprite from "./classes/Sprite.js";
 import { keys } from "./gameObjects.js";
+import { collisions } from "./collisions.js";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
