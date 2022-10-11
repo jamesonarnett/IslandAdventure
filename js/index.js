@@ -1,5 +1,5 @@
 import Sprite from "./classes/Sprite.js";
-import { keys } from "./gameObjects.js";
+import { keys, offset } from "./gameObjects.js";
 import { collisions } from "./collisions.js";
 
 const canvas = document.querySelector("canvas");
@@ -13,39 +13,85 @@ playerImage.src = "assets/imgs/character/playerDown.png";
 
 canvas.width = 1024;
 canvas.height = 576;
-c.fillStyle = "white";
-c.fillRect(0, 0, canvas.width, canvas.height);
+
+const player = new Sprite({
+  position: {
+    x: canvas.width / 2 - playerImage.width / 4 / 2,
+    y: canvas.height / 2 - playerImage.height / 2,
+  },
+  image: playerImage,
+  frames: { max: 4 },
+});
 
 const background = new Sprite({
-  position: { x: -735, y: -600 },
+  position: offset,
   image: image,
 });
 
+const collisionsMap = [];
+for (let i = 0; i < collisions.length; i += 70) {
+  collisionsMap.push(collisions.slice(i, i + 70));
+}
+
+class Boundary {
+  static width = 48;
+  static height = 48;
+  constructor(position) {
+    this.position = position;
+    this.width = 48;
+    this.height = 48;
+  }
+
+  draw() {
+    c.fillStyle = "red";
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+}
+
+const boundaries = [];
+collisionsMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1025) {
+      boundaries.push(
+        new Boundary({
+          x: j * Boundary.width + offset.x,
+          y: i * Boundary.height + offset.y,
+        })
+      );
+    }
+  });
+});
+
+const testBoundary = new Boundary({ x: 400, y: 400 });
+
+const moveables = [background, testBoundary];
 //--------------------------------------------------------------
 function animate() {
   requestAnimationFrame(animate);
   background.draw();
+  // boundaries.forEach((boundary) => boundary.draw());
+  testBoundary.draw();
+  player.draw();
 
-  c.drawImage(
-    playerImage,
-    0,
-    0,
-    playerImage.width / 4,
-    playerImage.height,
-    canvas.width / 2 - playerImage.width / 4 / 2,
-    canvas.height / 2 - playerImage.height / 2,
-    playerImage.width / 4,
-    playerImage.height
-  );
+  // if (player.position.x + player.width > canvas.width) {
+  // }
 
   if (keys.w.pressed && lastKey === "w") {
-    background.position.y += 3;
+    moveables.forEach((moveable) => {
+      moveable.position.y += 3;
+    });
   } else if (keys.s.pressed && lastKey === "s") {
-    background.position.y -= 3;
+    moveables.forEach((moveable) => {
+      moveable.position.y -= 3;
+    });
   } else if (keys.a.pressed && lastKey === "a") {
-    background.position.x += 3;
+    moveables.forEach((moveable) => {
+      moveable.position.x += 3;
+    });
   } else if (keys.d.pressed && lastKey === "d") {
-    background.position.x -= 3;
+    moveables.forEach((moveable) => {
+      moveable.position.x -= 3;
+    });
   }
 }
 
