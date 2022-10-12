@@ -4,6 +4,7 @@ const c = canvas.getContext("2d");
 export default class Sprite {
   constructor({ position, velocity, image, frames = { max: 1 } }) {
     this.position = position;
+    this.velocity = velocity;
     this.image = image;
     this.frames = frames;
 
