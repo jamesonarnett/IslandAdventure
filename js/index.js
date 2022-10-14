@@ -6,8 +6,11 @@ import { collisions } from "./collisions.js";
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
-const image = new Image();
-image.src = "assets/imgs/pelletTown.png";
+const backgroundImage = new Image();
+backgroundImage.src = "assets/imgs/pelletTown.png";
+
+const foregroundImage = new Image();
+foregroundImage.src = "assets/imgs/foregroundObject.png";
 
 const playerImage = new Image();
 playerImage.src = "assets/imgs/character/playerDown.png";
@@ -35,7 +38,16 @@ const background = new Sprite({
     x: 1,
     y: 1,
   },
-  image: image,
+  image: backgroundImage,
+});
+
+const foreground = new Sprite({
+  position: offset,
+  velocity: {
+    x: 1,
+    y: 1,
+  },
+  image: foregroundImage,
 });
 
 //--------------------------------------------------------------
@@ -77,6 +89,7 @@ const animate = () => {
     boundary.draw();
   });
   player.draw();
+  foreground.draw();
 
   let isPlayerColliding = false;
   if (keys.w.pressed && lastKey === "w") {
