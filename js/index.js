@@ -12,25 +12,46 @@ backgroundImage.src = "assets/imgs/pelletTown.png";
 const foregroundImage = new Image();
 foregroundImage.src = "assets/imgs/foregroundObject.png";
 
-const playerImage = new Image();
-playerImage.src = "assets/imgs/character/playerDown.png";
+const playerImageDown = new Image();
+playerImageDown.src = "assets/imgs/character/playerDown.png";
+
+const playerImageUp = new Image();
+playerImageUp.src = "assets/imgs/character/playerUp.png";
+
+const playerImageLeft = new Image();
+playerImageLeft.src = "assets/imgs/character/playerLeft.png";
+
+const playerImageRight = new Image();
+playerImageRight.src = "assets/imgs/character/playerRight.png";
 
 canvas.width = 1024;
 canvas.height = 576;
 
 //--------------------------------------------------------------
+
+//sprite image constants below
+//width: 192
+//height: 68
 const player = new Sprite({
   position: {
-    x: canvas.width / 2 - playerImage.width / 4 / 2,
-    y: canvas.height / 2 - (playerImage.height / 2 - 16),
+    x: canvas.width / 2 - 192 / 4 / 2,
+    y: canvas.height / 2 - (68 / 2 - 16),
   },
   velocity: {
     x: 1,
     y: 1,
   },
-  image: playerImage,
+  image: playerImageDown,
   frames: { max: 4 },
+  sprites: {
+    up: playerImageUp,
+    down: playerImageDown,
+    left: playerImageLeft,
+    right: playerImageRight,
+  },
 });
+
+console.log(player);
 
 const background = new Sprite({
   position: offset,
@@ -96,6 +117,8 @@ const animate = () => {
 
   if (keys.w.pressed && lastKey === "w") {
     player.moving = true;
+    player.image = player.sprites.up;
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -122,6 +145,8 @@ const animate = () => {
   }
   if (keys.s.pressed && lastKey === "s") {
     player.moving = true;
+    player.image = player.sprites.down;
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -148,6 +173,8 @@ const animate = () => {
   }
   if (keys.a.pressed && lastKey === "a") {
     player.moving = true;
+    player.image = player.sprites.left;
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -174,6 +201,8 @@ const animate = () => {
   }
   if (keys.d.pressed && lastKey === "d") {
     player.moving = true;
+    player.image = player.sprites.right;
+
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
