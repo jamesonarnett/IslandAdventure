@@ -92,7 +92,10 @@ const animate = () => {
   foreground.draw();
 
   let isPlayerColliding = false;
+  player.moving = false;
+
   if (keys.w.pressed && lastKey === "w") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -118,6 +121,7 @@ const animate = () => {
     }
   }
   if (keys.s.pressed && lastKey === "s") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -143,6 +147,7 @@ const animate = () => {
     }
   }
   if (keys.a.pressed && lastKey === "a") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -168,6 +173,7 @@ const animate = () => {
     }
   }
   if (keys.d.pressed && lastKey === "d") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
