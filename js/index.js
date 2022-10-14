@@ -1,4 +1,5 @@
 import Sprite from "./classes/Sprite.js";
+import Boundary from "./classes/Boundary.js";
 import { keys, offset } from "./gameObjects.js";
 import { collisions } from "./collisions.js";
 
@@ -14,6 +15,7 @@ playerImage.src = "assets/imgs/character/playerDown.png";
 canvas.width = 1024;
 canvas.height = 576;
 
+//--------------------------------------------------------------
 const player = new Sprite({
   position: {
     x: canvas.width / 2 - playerImage.width / 4 / 2,
@@ -36,24 +38,10 @@ const background = new Sprite({
   image: image,
 });
 
+//--------------------------------------------------------------
 const collisionsMap = [];
 for (let i = 0; i < collisions.length; i += 70) {
   collisionsMap.push(collisions.slice(i, i + 70));
-}
-
-class Boundary {
-  static width = 48;
-  static height = 48;
-  constructor(position) {
-    this.position = position;
-    this.width = 48;
-    this.height = 48;
-  }
-
-  draw() {
-    c.fillStyle = "rgba(0, 0, 0, 0)";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
-  }
 }
 
 const boundaries = [];
