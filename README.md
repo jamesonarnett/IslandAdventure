@@ -6,13 +6,15 @@ A breath of fresh air while staying hopeful on future employment. While this isn
 <br />
 Tiled (program to make the map image) is an absolute treat, and extraordinarily easy to use.
 
-## Try it out
+## Want to play?
 
-You can play a demo <a href="https://jamesonarnett.github.io/IslandAdventure/">here</a> as I continue developement.
+You can try a demo <a href="https://jamesonarnett.github.io/IslandAdventure/">here</a> as I continue
+development.
 
-### Progress Pics
+## Progress Pics
 
 <img src="assets/progressPics/main.png" alt="main pic start at house" width="800px" height="400px"/>
 <hr />
 <img src="assets/progressPics/water.png" alt="main pic start at house" width="800px" height="400px"/>
+<hr />
 <img src="assets/progressPics/battle.png" alt="main pic start at house" width="800px" height="400px"/>

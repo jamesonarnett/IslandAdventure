@@ -14,6 +14,7 @@ import {
 } from "./images.js";
 import { keys, battle, rectangularCollision } from "./helpers.js";
 import { boundaries, battleZones } from "./boundaries.js";
+import { attacks } from "./data/attacks.js";
 
 const canvas = document.querySelector("canvas");
 
@@ -234,28 +235,32 @@ const animate = () => {
   }
 };
 
+const renderedSprites = [];
 const animateBattle = () => {
   window.requestAnimationFrame(animateBattle);
   battleBackground.draw();
   draggle.draw();
   emby.draw();
+
+  renderedSprites.forEach((sprite) => {
+    sprite.draw();
+  });
 };
 
-animate();
+animateBattle();
+// animate();
 
 //--------------------------------------------------------------
 // attack button listeners
 document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", (e) => {
+    const selectedAttack = attacks[e.currentTarget.innerHTML];
+    console.log(selectedAttack);
+
     emby.attack({
-      attack: {
-        name: e.target.id,
-        damage: 10,
-        type: "Normal",
-      },
-      recipient: {
-        name: draggle,
-      },
+      attack: selectedAttack,
+      recipient: draggle,
+      renderedSprites,
     });
   });
 });
