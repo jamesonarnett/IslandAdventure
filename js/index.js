@@ -1,11 +1,14 @@
 import Sprite from "./classes/Sprite.js";
 import Boundary from "./classes/Boundary.js";
-import { keys, offset } from "./gameObjects.js";
-import { collisions } from "./collisions.js";
-import { battleZonesData } from "./battleZones.js";
+import { keys, offset, battle, rectangularCollision } from "./helpers.js";
+import { collisions } from "./data/collisions.js";
+import { battleZonesData } from "./data/battleZones.js";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
+
+canvas.width = 1024;
+canvas.height = 576;
 
 const backgroundImage = new Image();
 backgroundImage.src = "assets/imgs/pelletTown.png";
@@ -24,9 +27,6 @@ playerImageLeft.src = "assets/imgs/character/playerLeft.png";
 
 const playerImageRight = new Image();
 playerImageRight.src = "assets/imgs/character/playerRight.png";
-
-canvas.width = 1024;
-canvas.height = 576;
 
 //--------------------------------------------------------------
 
@@ -111,18 +111,9 @@ battleZonesMap.forEach((row, i) => {
 
 const moveables = [background, ...boundaries, ...battleZones];
 
-const rectangularCollision = ({ rectangle1, rectangle2 }) => {
-  return (
-    rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&
-    rectangle1.position.x <= rectangle2.position.x + rectangle2.width &&
-    rectangle1.position.y + rectangle1.height >= rectangle2.position.y &&
-    rectangle1.position.y <= rectangle2.position.y + rectangle2.height
-  );
-};
-
 //--------------------------------------------------------------
 const animate = () => {
-  requestAnimationFrame(animate);
+  const animationId = requestAnimationFrame(animate);
   background.draw();
   boundaries.forEach((boundary) => {
     boundary.draw();
@@ -133,6 +124,12 @@ const animate = () => {
   player.draw();
   foreground.draw();
 
+  //check movement here ensures stopping on battle activation
+  let isPlayerColliding = false;
+  player.moving = false;
+
+  //battle activation
+  if (battle.initiated) return;
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
     for (let i = 0; i < battleZones.length; i++) {
       const battleZone = battleZones[i];
@@ -160,15 +157,38 @@ const animate = () => {
         overlappingArea > (player.width * player.height) / 2 &&
         Math.random() < 0.01
       ) {
-        console.log("battleZone");
+        battle.initiated = true;
+
+        //deactivate old animation loop - OG game scene
+        window.cancelAnimationFrame(animationId);
+
+        //gsap = animation library
+        gsap.to("#overlappingDiv", {
+          opacity: 1,
+          repeat: 3,
+          yoyo: true,
+          duration: 0.3,
+          onComplete: () => {
+            gsap.to("#overlappingDiv", {
+              opacity: 1,
+              duration: 0.3,
+            });
+
+            //activate new animation loop - battle scene
+            animateBattle();
+          },
+        });
         break;
       }
     }
   }
 
-  let isPlayerColliding = false;
-  player.moving = false;
+  const animateBattle = () => {
+    window.requestAnimationFrame(animateBattle);
+    console.log("animateBattle");
+  };
 
+  //player movement
   if (keys.w.pressed && lastKey === "w") {
     player.moving = true;
     player.image = player.sprites.up;
