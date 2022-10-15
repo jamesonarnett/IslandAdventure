@@ -45,4 +45,30 @@ export default class Sprite {
       }
     }
   }
+
+  attack({ attack, recipient }) {
+    const timeline = gsap.timeline();
+
+    timeline
+      .to(this.position, {
+        x: this.position.x - 20,
+        duration: 0.3,
+      })
+      .to(this.position, {
+        x: this.position.x + 40,
+        duration: 0.05,
+        onComplete() {
+          gsap.to(recipient.name.position, {
+            x: recipient.name.position.x + 10,
+            yoyo: true,
+            repeat: 3,
+            duration: 0.3,
+          });
+        },
+      })
+      .to(this.position, {
+        x: this.position.x,
+        duration: 0.5,
+      });
+  }
 }

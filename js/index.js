@@ -118,13 +118,6 @@ const animate = () => {
     }
   }
 
-  const animateBattle = () => {
-    window.requestAnimationFrame(animateBattle);
-    battleBackground.draw();
-    draggle.draw();
-    emby.draw();
-  };
-
   //player movement
   if (keys.w.pressed && lastKey === "w") {
     player.animate = true;
@@ -241,7 +234,31 @@ const animate = () => {
   }
 };
 
+const animateBattle = () => {
+  window.requestAnimationFrame(animateBattle);
+  battleBackground.draw();
+  draggle.draw();
+  emby.draw();
+};
+
 animate();
+
+//--------------------------------------------------------------
+// attack button listeners
+document.querySelectorAll("button").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    emby.attack({
+      attack: {
+        name: e.target.id,
+        damage: 10,
+        type: "Normal",
+      },
+      recipient: {
+        name: draggle,
+      },
+    });
+  });
+});
 
 //--------------------------------------------------------------
 let lastKey = "";

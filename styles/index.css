@@ -18,7 +18,7 @@ h1 {
 }
 
 button {
-  border: 0;
+  border: 1px solid white;
   font-size: 16px;
 }
 
@@ -27,10 +27,13 @@ button:hover {
   cursor: pointer;
 }
 
+/* --------------------------------------------------------- */
+
 .gameContainer {
   position: relative;
 }
 
+/* "container" that flashes entire page on battleActivation */
 .battleActivation {
   position: absolute;
   width: 100%;
@@ -40,6 +43,8 @@ button:hover {
   pointer-events: none;
 }
 
+/* --------------------------------------------------------- */
+/* monster information boxes */
 .topMonsterBox {
   position: absolute;
   background-color: white;
@@ -60,9 +65,7 @@ button:hover {
   padding: 12px;
 }
 
-.monsterNames {
-  font-size: 16px;
-}
+/* --------------------------------------------------------- */
 
 .healthBarContainer {
   position: relative;
@@ -83,6 +86,8 @@ button:hover {
   right: 0;
 }
 
+/* --------------------------------------------------------- */
+/* bottom container holding attack options */
 .battleOptionsContainer {
   display: flex;
   position: absolute;
