@@ -1,5 +1,4 @@
 //objects
-//--------------------------------------------------------------
 export const keys = {
   w: {
     pressed: false,
@@ -24,9 +23,8 @@ export const battle = {
   initiated: false,
 };
 
-//functions
 //--------------------------------------------------------------
-
+//functions
 export const rectangularCollision = ({ rectangle1, rectangle2 }) => {
   return (
     rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&

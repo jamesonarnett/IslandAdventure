@@ -1,72 +1,43 @@
 import Sprite from "./classes/Sprite.js";
 import Boundary from "./classes/Boundary.js";
+import {
+  background,
+  foreground,
+  battleBackground,
+  draggle,
+  emby,
+} from "./sprites.js";
+import {
+  playerImageDown,
+  playerImageLeft,
+  playerImageRight,
+  playerImageUp,
+} from "./images.js";
 import { keys, offset, battle, rectangularCollision } from "./helpers.js";
 import { collisions } from "./data/collisions.js";
 import { battleZonesData } from "./data/battleZones.js";
 
 const canvas = document.querySelector("canvas");
-const c = canvas.getContext("2d");
 
 canvas.width = 1024;
 canvas.height = 576;
 
-const backgroundImage = new Image();
-backgroundImage.src = "assets/imgs/pelletTown.png";
-
-const foregroundImage = new Image();
-foregroundImage.src = "assets/imgs/foregroundObject.png";
-
-const playerImageDown = new Image();
-playerImageDown.src = "assets/imgs/character/playerDown.png";
-
-const playerImageUp = new Image();
-playerImageUp.src = "assets/imgs/character/playerUp.png";
-
-const playerImageLeft = new Image();
-playerImageLeft.src = "assets/imgs/character/playerLeft.png";
-
-const playerImageRight = new Image();
-playerImageRight.src = "assets/imgs/character/playerRight.png";
-
-const battleBackgroundImage = new Image();
-battleBackgroundImage.src = "assets/imgs/battleBackground.png";
-
-//--------------------------------------------------------------
-
-//sprite image constants
+//player spriteSheet image constants
 //width: 192
 //height: 68
-const player = new Sprite({
+export const player = new Sprite({
   position: {
     x: canvas.width / 2 - 192 / 4 / 2,
     y: canvas.height / 2 - (68 / 2 - 16),
   },
   image: playerImageDown,
-  frames: { max: 4 },
+  frames: { max: 4, hold: 15 },
   sprites: {
     up: playerImageUp,
     down: playerImageDown,
     left: playerImageLeft,
     right: playerImageRight,
   },
-});
-
-const background = new Sprite({
-  position: offset,
-  image: backgroundImage,
-});
-
-const foreground = new Sprite({
-  position: offset,
-  image: foregroundImage,
-});
-
-const battleBackground = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  image: battleBackgroundImage,
 });
 
 //--------------------------------------------------------------
@@ -125,7 +96,7 @@ const animate = () => {
 
   //check movement here ensures stopping on battle activation
   let isPlayerColliding = false;
-  player.moving = false;
+  player.animate = false;
 
   //battle activation
   if (battle.initiated) return;
@@ -191,12 +162,13 @@ const animate = () => {
   const animateBattle = () => {
     window.requestAnimationFrame(animateBattle);
     battleBackground.draw();
-    console.log("animateBattle");
+    draggle.draw();
+    emby.draw();
   };
 
   //player movement
   if (keys.w.pressed && lastKey === "w") {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.up;
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -225,7 +197,7 @@ const animate = () => {
     }
   }
   if (keys.s.pressed && lastKey === "s") {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.down;
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -253,7 +225,7 @@ const animate = () => {
     }
   }
   if (keys.a.pressed && lastKey === "a") {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.left;
 
     for (let i = 0; i < boundaries.length; i++) {
@@ -281,7 +253,7 @@ const animate = () => {
     }
   }
   if (keys.d.pressed && lastKey === "d") {
-    player.moving = true;
+    player.animate = true;
     player.image = player.sprites.right;
 
     for (let i = 0; i < boundaries.length; i++) {

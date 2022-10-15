@@ -4,13 +4,12 @@ const c = canvas.getContext("2d");
 export default class Sprite {
   constructor({
     position,
-    velocity,
     image,
-    frames = { max: 1 },
+    frames = { max: 1, hold: 15 },
     sprites = [],
+    animate = false,
   }) {
     this.position = position;
-    this.velocity = velocity;
     this.image = image;
     this.frames = { ...frames, val: 0, elapsed: 0 };
     this.sprites = sprites;
@@ -20,7 +19,7 @@ export default class Sprite {
       this.height = this.image.height;
     };
 
-    this.moving = false;
+    this.animate = animate;
   }
 
   draw() {
@@ -36,10 +35,10 @@ export default class Sprite {
       this.image.height
     );
 
-    if (!this.moving) return;
+    if (!this.animate) return;
     if (this.frames.max > 1) {
       this.frames.elapsed++;
-      if (this.frames.elapsed % 15 === 0) {
+      if (this.frames.elapsed % this.frames.hold === 0) {
         this.frames.val < this.frames.max - 1
           ? this.frames.val++
           : (this.frames.val = 0);
