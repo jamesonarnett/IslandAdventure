@@ -8,8 +8,6 @@ import {
 } from "./images.js";
 import { offset } from "./helpers.js";
 
-const canvas = document.querySelector("canvas");
-
 export const background = new Sprite({
   position: offset,
   image: backgroundImage,

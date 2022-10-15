@@ -8,8 +8,23 @@ canvas {
   height: 100%;
 }
 
+h1 {
+  margin: 0;
+}
+
 .gameContainer {
   position: relative;
+}
+
+.battleContainer {
+  display: flex;
+  position: absolute;
+  background-color: white;
+  height: 10vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 4px solid black;
 }
 
 .battleActivation {
@@ -19,4 +34,12 @@ canvas {
   background-color: black;
   opacity: 0;
   pointer-events: none;
+}
+
+.attacksDiv {
+  /*  */
+}
+
+.attackTypeDiv {
+  /*  */
 }
