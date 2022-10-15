@@ -1,5 +1,4 @@
 import Sprite from "./classes/Sprite.js";
-import Boundary from "./classes/Boundary.js";
 import {
   background,
   foreground,
@@ -13,9 +12,8 @@ import {
   playerImageRight,
   playerImageUp,
 } from "./images.js";
-import { keys, offset, battle, rectangularCollision } from "./helpers.js";
-import { collisions } from "./data/collisions.js";
-import { battleZonesData } from "./data/battleZones.js";
+import { keys, battle, rectangularCollision } from "./helpers.js";
+import { boundaries, battleZones } from "./boundaries.js";
 
 const canvas = document.querySelector("canvas");
 
@@ -38,45 +36,6 @@ export const player = new Sprite({
     left: playerImageLeft,
     right: playerImageRight,
   },
-});
-
-//--------------------------------------------------------------
-const collisionsMap = [];
-for (let i = 0; i < collisions.length; i += 70) {
-  collisionsMap.push(collisions.slice(i, i + 70));
-}
-
-const battleZonesMap = [];
-for (let i = 0; i < battleZonesData.length; i += 70) {
-  battleZonesMap.push(battleZonesData.slice(i, i + 70));
-}
-
-const boundaries = [];
-collisionsMap.forEach((row, i) => {
-  row.forEach((symbol, j) => {
-    if (symbol === 1025) {
-      boundaries.push(
-        new Boundary({
-          x: j * Boundary.width + offset.x,
-          y: i * Boundary.height + offset.y,
-        })
-      );
-    }
-  });
-});
-
-const battleZones = [];
-battleZonesMap.forEach((row, i) => {
-  row.forEach((symbol, j) => {
-    if (symbol === 1025) {
-      battleZones.push(
-        new Boundary({
-          x: j * Boundary.width + offset.x,
-          y: i * Boundary.height + offset.y,
-        })
-      );
-    }
-  });
 });
 
 const moveables = [background, ...boundaries, ...battleZones];
