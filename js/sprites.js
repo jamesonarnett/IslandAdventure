@@ -5,8 +5,11 @@ import {
   battleBackgroundImage,
   backgroundImage,
   foregroundImage,
+  emberImage,
 } from "./images.js";
 import { offset } from "./helpers.js";
+
+//--------------------------------------------------------------
 
 export const background = new Sprite({
   position: offset,
@@ -26,6 +29,7 @@ export const battleBackground = new Sprite({
   image: battleBackgroundImage,
 });
 
+//--------------------------------------------------------------
 //monsters
 export const draggle = new Sprite({
   position: {
@@ -47,3 +51,18 @@ export const emby = new Sprite({
   frames: { max: 4, hold: 50 },
   animate: true,
 });
+
+// --------------------------------------------------------------
+// Attacks
+// export const ember = new Sprite({
+//   position: {
+//     x: this.position.x,
+//     y: this.position.y,
+//   },
+//   image: emberImage,
+//   frames: {
+//     max: 4,
+//     hold: 10,
+//   },
+//   animate: true,
+// });

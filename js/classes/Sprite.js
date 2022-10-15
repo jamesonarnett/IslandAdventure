@@ -1,4 +1,5 @@
-import { emberImage, draggleImage } from "../images.js";
+// import { emberImage } from "../images.js";
+// import { ember } from "../sprites.js";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -56,17 +57,17 @@ export default class Sprite {
   }
 
   attack({ attack, recipient, renderedSprites }) {
+    let healthBar = "#enemyHealthBar";
+    if (this.isEnemy) healthBar = "#playerHealthBar";
+
+    this.health -= attack.damage;
+
     switch (attack.name) {
       case "Tackle":
         const timeline = gsap.timeline();
 
-        this.health -= attack.damage;
-
         let moveDistance = 20;
         if (this.isEnemy) moveDistance = -20;
-
-        let healthBar = "#enemyHealthBar";
-        if (this.isEnemy) healthBar = "#playerHealthBar";
 
         timeline
           .to(this.position, {
@@ -102,8 +103,8 @@ export default class Sprite {
           });
         break;
       case "Ember":
-        console.log(emberImage);
-        console.log(draggleImage);
+        const emberImage = new Image();
+        emberImage.src = "../assets/imgs/attacks/ember.png";
         const ember = new Sprite({
           position: {
             x: this.position.x,
@@ -116,12 +117,32 @@ export default class Sprite {
           },
           animate: true,
         });
-
         renderedSprites.push(ember);
 
         gsap.to(ember.position, {
           x: recipient.position.x,
           y: recipient.position.y,
+          onComplete: () => {
+            gsap.to(healthBar, {
+              width: this.health + "%",
+            });
+
+            gsap.to(recipient.position, {
+              x: recipient.position.x + 10,
+              yoyo: true,
+              repeat: 3,
+              duration: 0.08,
+            });
+
+            gsap.to(recipient, {
+              opacity: 0,
+              yoyo: true,
+              repeat: 3,
+              duration: 0.08,
+            });
+
+            renderedSprites.pop();
+          },
         });
         break;
     }
