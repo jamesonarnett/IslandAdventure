@@ -35,6 +35,7 @@ export const draggle = new Sprite({
   image: draggleImage,
   frames: { max: 4, hold: 50 },
   animate: true,
+  isEnemy: true,
 });
 
 export const emby = new Sprite({
