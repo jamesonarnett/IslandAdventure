@@ -28,19 +28,18 @@ playerImageLeft.src = "assets/imgs/character/playerLeft.png";
 const playerImageRight = new Image();
 playerImageRight.src = "assets/imgs/character/playerRight.png";
 
+const battleBackgroundImage = new Image();
+battleBackgroundImage.src = "assets/imgs/battleBackground.png";
+
 //--------------------------------------------------------------
 
-//sprite image constants below
+//sprite image constants
 //width: 192
 //height: 68
 const player = new Sprite({
   position: {
     x: canvas.width / 2 - 192 / 4 / 2,
     y: canvas.height / 2 - (68 / 2 - 16),
-  },
-  velocity: {
-    x: 1,
-    y: 1,
   },
   image: playerImageDown,
   frames: { max: 4 },
@@ -54,20 +53,20 @@ const player = new Sprite({
 
 const background = new Sprite({
   position: offset,
-  velocity: {
-    x: 1,
-    y: 1,
-  },
   image: backgroundImage,
 });
 
 const foreground = new Sprite({
   position: offset,
-  velocity: {
-    x: 1,
-    y: 1,
-  },
   image: foregroundImage,
+});
+
+const battleBackground = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  image: battleBackgroundImage,
 });
 
 //--------------------------------------------------------------
@@ -172,10 +171,16 @@ const animate = () => {
             gsap.to("#overlappingDiv", {
               opacity: 1,
               duration: 0.3,
-            });
+              onComplete: () => {
+                //activate new animation loop - battle scene
+                animateBattle();
 
-            //activate new animation loop - battle scene
-            animateBattle();
+                gsap.to("#overlappingDiv", {
+                  opacity: 0,
+                  duration: 0.3,
+                });
+              },
+            });
           },
         });
         break;
@@ -185,6 +190,7 @@ const animate = () => {
 
   const animateBattle = () => {
     window.requestAnimationFrame(animateBattle);
+    battleBackground.draw();
     console.log("animateBattle");
   };
 
