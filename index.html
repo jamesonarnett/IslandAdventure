@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IslandAdventure</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/imgs/monsters/embySprite.png"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,33 +21,36 @@
   <body>
     <div class="gameContainer">
       <div id="overlappingDiv" class="battleActivation"></div>
-      <div class="topMonsterBox">
-        <h1 class="monsterNames">Draggle</h1>
-        <div class="healthBarContainer">
-          <div class="healthBar"></div>
-          <div id="enemyHealthBar" class="healthBarOverLay"></div>
-        </div>
-      </div>
-      <div class="bottomMonsterBox">
-        <h1 class="monsterNames">Emby</h1>
-        <div class="healthBarContainer">
-          <div class="healthBar"></div>
-          <div id="playerHealthBar" class="healthBarOverLay"></div>
-        </div>
-      </div>
-      <canvas></canvas>
 
-      <div class="battleOptionsContainer">
-        <div class="attacksDiv">
-          <button id="tackle">Tackle</button>
-          <button id="ember">Ember</button>
-          <!-- <button>Petrify</button> -->
-          <!-- <button>Fire lick</button> -->
+      <div id="isBattleActive">
+        <div class="topMonsterBox">
+          <h1 class="monsterNames">Draggle</h1>
+          <div class="healthBarContainer">
+            <div class="healthBar"></div>
+            <div id="enemyHealthBar" class="healthBarOverLay"></div>
+          </div>
         </div>
-        <div class="attackTypeDiv">
-          <h1>Attack Type</h1>
+        <div class="bottomMonsterBox">
+          <h1 class="monsterNames">Emby</h1>
+          <div class="healthBarContainer">
+            <div class="healthBar"></div>
+            <div id="playerHealthBar" class="healthBarOverLay"></div>
+          </div>
+        </div>
+        <div class="battleOptionsContainer">
+          <div class="attacksDiv">
+            <button id="tackle">Tackle</button>
+            <button id="ember">Ember</button>
+            <!-- <button>Petrify</button> -->
+            <!-- <button>Fire lick</button> -->
+          </div>
+          <div class="attackTypeDiv">
+            <h1>Attack Type</h1>
+          </div>
         </div>
       </div>
+
+      <canvas></canvas>
     </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"

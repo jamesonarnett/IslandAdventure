@@ -1,5 +1,6 @@
 * {
   font-family: "Press Start 2P", cursive;
+  z-index: 1;
 }
 
 body {
@@ -31,6 +32,10 @@ button:hover {
 
 .gameContainer {
   position: relative;
+}
+
+#isBattleActive {
+  visibility: hidden;
 }
 
 /* "container" that flashes entire page on battleActivation */

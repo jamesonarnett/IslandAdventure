@@ -104,6 +104,10 @@ const animate = () => {
               duration: 0.3,
               onComplete: () => {
                 //activate new animation loop - battle scene
+                gsap.set("#isBattleActive", {
+                  visibility: "visible",
+                  duration: 0.3,
+                });
                 animateBattle();
 
                 gsap.to("#overlappingDiv", {
@@ -236,14 +240,14 @@ const animate = () => {
 };
 
 const renderedSprites = [draggle, emby];
-function animateBattle() {
+const animateBattle = () => {
   window.requestAnimationFrame(animateBattle);
   battleBackground.draw();
 
   renderedSprites.forEach((sprite) => {
     sprite.draw();
   });
-}
+};
 
 // animateBattle();
 animate();
