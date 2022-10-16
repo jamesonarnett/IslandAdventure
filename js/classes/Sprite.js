@@ -12,6 +12,7 @@ export default class Sprite {
     sprites = [],
     animate = false,
     isEnemy = false,
+    rotation = 0,
   }) {
     this.position = position;
     this.image = image;
@@ -22,6 +23,7 @@ export default class Sprite {
     this.opacity = 1;
     this.health = 100;
     this.isEnemy = isEnemy;
+    this.rotation = rotation;
 
     this.image.onload = () => {
       this.width = this.image.width / this.frames.max;
@@ -31,6 +33,17 @@ export default class Sprite {
 
   draw() {
     c.save();
+
+    c.translate(
+      this.position.x + this.width / 2,
+      this.position.y + this.height / 2
+    );
+    c.rotate(this.rotation);
+    c.translate(
+      -this.position.x - this.width / 2,
+      -this.position.y - this.height / 2
+    );
+
     c.globalAlpha = this.opacity;
     c.drawImage(
       this.image,
@@ -57,10 +70,13 @@ export default class Sprite {
   }
 
   attack({ attack, recipient, renderedSprites }) {
+    this.health -= attack.damage;
+
     let healthBar = "#enemyHealthBar";
     if (this.isEnemy) healthBar = "#playerHealthBar";
 
-    this.health -= attack.damage;
+    let rotation = 1;
+    if (this.isEnemy) rotation = -2.3;
 
     switch (attack.name) {
       case "Tackle":
@@ -116,8 +132,9 @@ export default class Sprite {
             hold: 10,
           },
           animate: true,
+          rotation,
         });
-        renderedSprites.push(ember);
+        renderedSprites.splice(1, 0, ember);
 
         gsap.to(ember.position, {
           x: recipient.position.x,
@@ -141,7 +158,7 @@ export default class Sprite {
               duration: 0.08,
             });
 
-            renderedSprites.pop();
+            renderedSprites.splice(1, 1);
           },
         });
         break;

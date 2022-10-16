@@ -235,20 +235,18 @@ const animate = () => {
   }
 };
 
-const renderedSprites = [];
-const animateBattle = () => {
+const renderedSprites = [draggle, emby];
+function animateBattle() {
   window.requestAnimationFrame(animateBattle);
   battleBackground.draw();
-  draggle.draw();
-  emby.draw();
 
   renderedSprites.forEach((sprite) => {
     sprite.draw();
   });
-};
+}
 
-animateBattle();
-// animate();
+// animateBattle();
+animate();
 
 //--------------------------------------------------------------
 // attack button listeners
