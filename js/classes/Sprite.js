@@ -1,4 +1,4 @@
-// import { emberImage } from "../images.js";
+import { emberImage } from "../images.js";
 // import { ember } from "../sprites.js";
 
 const canvas = document.querySelector("canvas");
@@ -119,8 +119,8 @@ export default class Sprite {
           });
         break;
       case "Ember":
-        const emberImage = new Image();
-        emberImage.src = "../assets/imgs/attacks/ember.png";
+        // const emberImage = new Image();
+        // emberImage.src = "../assets/imgs/attacks/ember.png";
         const ember = new Sprite({
           position: {
             x: this.position.x,
