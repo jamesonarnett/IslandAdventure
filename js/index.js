@@ -240,17 +240,24 @@ const animate = () => {
 };
 
 const renderedSprites = [draggle, emby];
+//needs to be refactored to add additional attack options
+// && scalability
 const button = document.createElement("button");
-button.innerText = "Ember";
+button.innerText = "Tackle";
 document.querySelector("#attacksBox").append(button);
 
 const animateBattle = () => {
-  window.requestAnimationFrame(animateBattle);
+  const battleId = window.requestAnimationFrame(animateBattle);
   battleBackground.draw();
 
   renderedSprites.forEach((sprite) => {
     sprite.draw();
   });
+
+  if (!battle.initiated) {
+    window.cancelAnimationFrame(battleId);
+    animate();
+  }
 };
 
 animate();
@@ -280,11 +287,23 @@ document.querySelectorAll("button").forEach((button) => {
 });
 
 document.querySelector("#dialogBox").addEventListener("click", (e) => {
-  if (queue.length > 1) {
+  if (queue.length >= 1) {
     queue[0]();
     queue.shift();
   } else {
     e.currentTarget.style.display = "none";
+  }
+
+  if (emby.health <= 0 || draggle.health <= 0) {
+    gsap.to("#isBattleActive", {
+      visibility: "hidden",
+      duration: 0.3,
+    });
+    gsap.to("#dialogBox", {
+      display: "none",
+    });
+    battle.initiated = false;
+    draggle.health = 100;
   }
 });
 

@@ -76,6 +76,7 @@ export default class Sprite {
     document.querySelector(
       "#dialogBox"
     ).innerHTML = `${this.name} used ${attack.name}!`;
+
     this.health -= attack.damage;
 
     let healthBar = "#enemyHealthBar";
