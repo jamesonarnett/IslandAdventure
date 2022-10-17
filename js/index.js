@@ -252,7 +252,12 @@ const animateBattle = () => {
 animate();
 
 //--------------------------------------------------------------
-// attack button listeners
+//battle queue
+
+const queue = [];
+
+//--------------------------------------------------------------
+// attack && dialog button listeners
 document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", (e) => {
     const selectedAttack = attacks[e.currentTarget.innerHTML];
@@ -263,11 +268,24 @@ document.querySelectorAll("button").forEach((button) => {
       recipient: draggle,
       renderedSprites,
     });
+
+    queue.push(() => {
+      draggle.attack({
+        attack: attacks["Tackle"],
+        recipient: emby,
+        renderedSprites,
+      });
+    });
   });
 });
 
 document.querySelector("#dialogBox").addEventListener("click", (e) => {
-  e.currentTarget.style.display = "none";
+  if (queue.length > 1) {
+    queue[0]();
+    queue.shift();
+  } else {
+    e.currentTarget.style.display = "none";
+  }
 });
 
 //--------------------------------------------------------------
