@@ -240,6 +240,10 @@ const animate = () => {
 };
 
 const renderedSprites = [draggle, emby];
+const button = document.createElement("button");
+button.innerText = "Ember";
+document.querySelector("#attacksBox").append(button);
+
 const animateBattle = () => {
   window.requestAnimationFrame(animateBattle);
   battleBackground.draw();
@@ -252,16 +256,12 @@ const animateBattle = () => {
 animate();
 
 //--------------------------------------------------------------
-//battle queue
-
-const queue = [];
-
-//--------------------------------------------------------------
 // attack && dialog button listeners
+// adds attack queue
+const queue = [];
 document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", (e) => {
     const selectedAttack = attacks[e.currentTarget.innerHTML];
-    console.log(selectedAttack);
 
     emby.attack({
       attack: selectedAttack,
