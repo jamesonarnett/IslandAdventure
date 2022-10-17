@@ -6,6 +6,7 @@ const c = canvas.getContext("2d");
 
 export default class Sprite {
   constructor({
+    name,
     position,
     image,
     frames = { max: 1, hold: 15 },
@@ -14,6 +15,7 @@ export default class Sprite {
     isEnemy = false,
     rotation = 0,
   }) {
+    this.name = name;
     this.position = position;
     this.image = image;
     this.animate = animate;
@@ -70,6 +72,10 @@ export default class Sprite {
   }
 
   attack({ attack, recipient, renderedSprites }) {
+    document.querySelector("#dialogBox").style.display = "block";
+    document.querySelector(
+      "#dialogBox"
+    ).innerHTML = `${this.name} used ${attack.name}!`;
     this.health -= attack.damage;
 
     let healthBar = "#enemyHealthBar";

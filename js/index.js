@@ -266,6 +266,10 @@ document.querySelectorAll("button").forEach((button) => {
   });
 });
 
+document.querySelector("#dialogBox").addEventListener("click", (e) => {
+  e.currentTarget.style.display = "none";
+});
+
 //--------------------------------------------------------------
 let lastKey = "";
 window.addEventListener("keydown", (e) => {

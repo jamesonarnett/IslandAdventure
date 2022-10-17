@@ -32,6 +32,7 @@ export const battleBackground = new Sprite({
 //--------------------------------------------------------------
 //monsters
 export const draggle = new Sprite({
+  name: "Draggle",
   position: {
     x: 800,
     y: 100,
@@ -43,6 +44,7 @@ export const draggle = new Sprite({
 });
 
 export const emby = new Sprite({
+  name: "Emby",
   position: {
     x: 325,
     y: 400,
