@@ -80,7 +80,6 @@ export const initBattle = () => {
         queue.push(() => {
           emby.faint();
         });
-
         //fade back to black exiting battle
         //continue to animate
         queue.push(() => {

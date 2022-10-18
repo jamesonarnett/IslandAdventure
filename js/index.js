@@ -1,37 +1,11 @@
-import Sprite from "./classes/Sprite.js";
-import { background, foreground } from "./sprites.js";
-import {
-  playerImageDown,
-  playerImageLeft,
-  playerImageRight,
-  playerImageUp,
-} from "./images.js";
+import { background, foreground, player } from "./sprites.js";
 import { keys, battle, rectangularCollision } from "./helpers.js";
 import { boundaries, battleZones } from "./boundaries.js";
 import { animateBattle, initBattle } from "./battleScene.js";
 
 const canvas = document.querySelector("canvas");
-
 canvas.width = 1024;
 canvas.height = 576;
-
-//player spriteSheet image constants
-//width: 192
-//height: 68
-export const player = new Sprite({
-  position: {
-    x: canvas.width / 2 - 192 / 4 / 2,
-    y: canvas.height / 2 - (68 / 2 - 16),
-  },
-  image: playerImageDown,
-  frames: { max: 4, hold: 15 },
-  sprites: {
-    up: playerImageUp,
-    down: playerImageDown,
-    left: playerImageLeft,
-    right: playerImageRight,
-  },
-});
 
 const moveables = [background, ...boundaries, ...battleZones];
 
