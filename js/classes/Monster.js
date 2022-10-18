@@ -26,13 +26,23 @@ export default class Monster extends Sprite {
     this.attacks = attacks;
   }
 
+  faint() {
+    document.querySelector("#dialogBox").innerHTML = `${this.name} fainted!!`;
+    gsap.to(this.position, {
+      y: this.position.y + 20,
+    });
+    gsap.to(this, {
+      opacity: 0,
+    });
+  }
+
   attack({ attack, recipient, renderedSprites }) {
     document.querySelector("#dialogBox").style.display = "block";
     document.querySelector(
       "#dialogBox"
     ).innerHTML = `${this.name} used ${attack.name}!`;
 
-    this.health -= attack.damage;
+    recipient.health -= attack.damage;
 
     let healthBar = "#enemyHealthBar";
     if (this.isEnemy) healthBar = "#playerHealthBar";
@@ -57,7 +67,7 @@ export default class Monster extends Sprite {
             duration: 0.05,
             onComplete: () => {
               gsap.to(healthBar, {
-                width: this.health + "%",
+                width: recipient.health + "%",
               });
 
               gsap.to(recipient.position, {
@@ -103,7 +113,7 @@ export default class Monster extends Sprite {
           y: recipient.position.y,
           onComplete: () => {
             gsap.to(healthBar, {
-              width: this.health + "%",
+              width: recipient.health + "%",
             });
 
             gsap.to(recipient.position, {

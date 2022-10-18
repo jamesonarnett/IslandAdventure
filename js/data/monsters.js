@@ -1,4 +1,3 @@
-import { embyImage, draggleImage } from "../images.js";
 import { attacks } from "./attacks.js";
 
 export const monsters = {
@@ -8,7 +7,9 @@ export const monsters = {
       x: 325,
       y: 400,
     },
-    image: embyImage,
+    image: {
+      src: "./assets/imgs/monsters/embySprite.png",
+    },
     frames: { max: 4, hold: 50 },
     animate: true,
     attacks: [attacks.Tackle, attacks.Ember],
@@ -19,7 +20,9 @@ export const monsters = {
       x: 800,
       y: 100,
     },
-    image: draggleImage,
+    image: {
+      src: "./assets/imgs/monsters/draggleSprite.png",
+    },
     frames: { max: 4, hold: 50 },
     animate: true,
     isEnemy: true,

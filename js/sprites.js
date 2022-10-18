@@ -30,5 +30,5 @@ export const battleBackground = new Sprite({
 
 //--------------------------------------------------------------
 //monsters
-export const draggle = new Monster(monsters.Draggle);
-export const emby = new Monster(monsters.Emby);
+export let draggle = new Monster(monsters.Draggle);
+export let emby = new Monster(monsters.Emby);

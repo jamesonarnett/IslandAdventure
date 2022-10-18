@@ -46,6 +46,7 @@ button:hover {
   background-color: black;
   opacity: 0;
   pointer-events: none;
+  z-index: 2;
 }
 
 /* --------------------------------------------------------- */

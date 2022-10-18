@@ -8,7 +8,7 @@ import {
 } from "./images.js";
 import { keys, battle, rectangularCollision } from "./helpers.js";
 import { boundaries, battleZones } from "./boundaries.js";
-import { animateBattle } from "./battleScene.js";
+import { animateBattle, initBattle } from "./battleScene.js";
 
 const canvas = document.querySelector("canvas");
 
@@ -102,6 +102,7 @@ export const animate = () => {
                   visibility: "visible",
                   duration: 0.3,
                 });
+                initBattle();
                 animateBattle();
 
                 gsap.to("#overlappingDiv", {
