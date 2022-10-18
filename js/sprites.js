@@ -3,7 +3,6 @@ import {
   battleBackgroundImage,
   backgroundImage,
   foregroundImage,
-  emberImage,
 } from "./images.js";
 import { offset } from "./helpers.js";
 import { monsters } from "./data/monsters.js";
@@ -32,18 +31,3 @@ export const battleBackground = new Sprite({
 //monsters
 export const draggle = new Sprite(monsters.Draggle);
 export const emby = new Sprite(monsters.Emby);
-
-// --------------------------------------------------------------
-// Attacks
-// export const ember = new Sprite({
-//   position: {
-//     x: this.position.x,
-//     y: this.position.y,
-//   },
-//   image: emberImage,
-//   frames: {
-//     max: 4,
-//     hold: 10,
-//   },
-//   animate: true,
-// });

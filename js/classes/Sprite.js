@@ -1,6 +1,3 @@
-// import { emberImage } from "../images.js";
-// import { ember } from "../sprites.js";
-
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
