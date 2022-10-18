@@ -2,11 +2,11 @@ import { background, foreground, player } from "./sprites.js";
 import { keys, battle, rectangularCollision } from "./helpers.js";
 import { boundaries, battleZones } from "./boundaries.js";
 import { animateBattle, initBattle } from "./battleScene.js";
+import { audio } from "./data/audio.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 1024;
 canvas.height = 576;
-
 const moveables = [background, ...boundaries, ...battleZones];
 
 //--------------------------------------------------------------
@@ -56,6 +56,9 @@ export const animate = () => {
         Math.random() < 0.01
       ) {
         battle.initiated = true;
+        audio.Map.stop();
+        audio.initBattle.play();
+        audio.Battle.play();
 
         //deactivate old animation loop - OG game scene
         window.cancelAnimationFrame(animationId);
@@ -247,5 +250,13 @@ window.addEventListener("keyup", (e) => {
     case "d":
       keys.d.pressed = false;
       break;
+  }
+});
+
+let clicked = false;
+addEventListener("click", (e) => {
+  if (!clicked) {
+    audio.Map.play();
+    clicked = true;
   }
 });

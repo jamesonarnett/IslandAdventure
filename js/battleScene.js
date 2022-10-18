@@ -4,6 +4,7 @@ import { animate } from "./index.js";
 import { attacks } from "./data/attacks.js";
 import Monster from "./classes/Monster.js";
 import { monsters } from "./data/monsters.js";
+import { audio } from "./data/audio.js";
 
 const canvas = document.querySelector("canvas");
 
@@ -112,6 +113,8 @@ const exitBattle = () => {
   gsap.to("#dialogBox", {
     display: "none",
   });
+  audio.Battle.stop();
+  audio.Map.play();
 };
 
 export const animateBattle = () => {

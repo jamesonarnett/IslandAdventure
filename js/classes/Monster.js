@@ -1,4 +1,5 @@
 import Sprite from "./Sprite.js";
+import { audio } from "../data/audio.js";
 
 export default class Monster extends Sprite {
   constructor({
@@ -34,6 +35,7 @@ export default class Monster extends Sprite {
     gsap.to(this, {
       opacity: 0,
     });
+    audio.Victory.play();
   }
 
   attack({ attack, recipient, renderedSprites }) {
@@ -66,6 +68,7 @@ export default class Monster extends Sprite {
             x: this.position.x + moveDistance * 2,
             duration: 0.05,
             onComplete: () => {
+              audio.TackleHit.play();
               gsap.to(healthBar, {
                 width: recipient.health + "%",
               });
@@ -91,6 +94,7 @@ export default class Monster extends Sprite {
           });
         break;
       case "Ember":
+        audio.initEmber.play();
         const emberImage = new Image();
         emberImage.src = "assets/imgs/attacks/ember.png";
         const ember = new Sprite({
@@ -112,6 +116,7 @@ export default class Monster extends Sprite {
           x: recipient.position.x,
           y: recipient.position.y,
           onComplete: () => {
+            audio.EmberHit.play();
             gsap.to(healthBar, {
               width: recipient.health + "%",
             });
