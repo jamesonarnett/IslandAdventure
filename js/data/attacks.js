@@ -9,4 +9,9 @@ export const attacks = {
     damage: 15,
     type: "Fire",
   },
+  // HeadButt: {
+  //   name: "HeadButt",
+  //   damage: 13,
+  //   type: "Fighting",
+  // },
 };

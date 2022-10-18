@@ -23,6 +23,6 @@ export const monsters = {
     frames: { max: 4, hold: 50 },
     animate: true,
     isEnemy: true,
-    attacks: [attacks.Tackle],
+    attacks: [attacks.Tackle, attacks.Ember],
   },
 };

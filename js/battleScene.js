@@ -4,11 +4,12 @@ import { animate } from "./index.js";
 import { attacks } from "./data/attacks.js";
 
 const renderedSprites = [draggle, emby];
-//needs to be refactored to add additional attack options
-// && scalability
-const button = document.createElement("button");
-button.innerText = "Tackle";
-document.querySelector("#attacksBox").append(button);
+
+emby.attacks.forEach((attack) => {
+  const button = document.createElement("button");
+  button.innerText = attack.name;
+  document.querySelector("#attacksBox").append(button);
+});
 
 export const animateBattle = () => {
   const battleId = window.requestAnimationFrame(animateBattle);
@@ -37,9 +38,12 @@ document.querySelectorAll("button").forEach((button) => {
       renderedSprites,
     });
 
+    const randomAttack =
+      draggle.attacks[Math.floor(Math.random() * draggle.attacks.length)];
+
     queue.push(() => {
       draggle.attack({
-        attack: attacks["Tackle"],
+        attack: randomAttack,
         recipient: emby,
         renderedSprites,
       });
