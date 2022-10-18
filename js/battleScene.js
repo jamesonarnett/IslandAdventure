@@ -23,7 +23,6 @@ export const animateBattle = () => {
     animate();
   }
 };
-
 //--------------------------------------------------------------
 // attack && dialog button listeners
 // adds attack queue
