@@ -8,6 +8,7 @@ export const battleBackgroundImage = new Image();
 battleBackgroundImage.src = "assets/imgs/battleBackground.png";
 
 // --------------------------------------------------------------
+//Player
 export const playerImageDown = new Image();
 playerImageDown.src = "assets/imgs/character/playerDown.png";
 

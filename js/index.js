@@ -3,6 +3,7 @@ import { keys, battle, rectangularCollision } from "./helpers.js";
 import { boundaries, battleZones } from "./boundaries.js";
 import { animateBattle, initBattle } from "./battleScene.js";
 import { audio } from "./data/audio.js";
+import { lastKey } from "./listeners.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 1024;
@@ -212,51 +213,3 @@ export const animate = () => {
 };
 
 animate();
-
-//--------------------------------------------------------------
-let lastKey = "";
-window.addEventListener("keydown", (e) => {
-  switch (e.key) {
-    case "w":
-      keys.w.pressed = true;
-      lastKey = "w";
-      break;
-    case "a":
-      keys.a.pressed = true;
-      lastKey = "a";
-      break;
-    case "s":
-      keys.s.pressed = true;
-      lastKey = "s";
-      break;
-    case "d":
-      keys.d.pressed = true;
-      lastKey = "d";
-      break;
-  }
-});
-
-window.addEventListener("keyup", (e) => {
-  switch (e.key) {
-    case "w":
-      keys.w.pressed = false;
-      break;
-    case "a":
-      keys.a.pressed = false;
-      break;
-    case "s":
-      keys.s.pressed = false;
-      break;
-    case "d":
-      keys.d.pressed = false;
-      break;
-  }
-});
-
-let clicked = false;
-addEventListener("click", (e) => {
-  if (!clicked) {
-    audio.Map.play();
-    clicked = true;
-  }
-});
